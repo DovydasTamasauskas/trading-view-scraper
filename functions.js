@@ -1,27 +1,29 @@
 const changeDate = async (page) => {
   await page.click(".button-uToIfRbZ");
-  await new Promise((r) => setTimeout(r, 1000));
-  await page.click(".light-button-bYDQcOkp");
-  await page.click(".light-button-bYDQcOkp");
-  await page.click(".light-button-bYDQcOkp");
+
+  await new Promise((r) => setTimeout(r, 500));
+  for (var i = 0; i < 12; i++) await goToPreviuosMonth(page);
+
   await page.click(".day-N6r5jhbE");
   await page.click(".variant-primary-D4RPB3ZC");
 };
 
-const exportData = async (page) => {
-  let allArrows = await page.$$(
-    "button.button-merBkM5y.apply-common-tooltip.accessible-merBkM5y"
-  );
+const setDate = async (page) => {
+  await page.click(".button-uToIfRbZ");
+  await new Promise((r) => setTimeout(r, 500));
+  await page.click(".variant-primary-D4RPB3ZC");
+};
 
-  for (const single of allArrows) {
-    const aa = await page.evaluate(
-      (el) => el.getAttribute("data-tooltip"),
-      single
-    );
-    if (aa == "Manage layouts") {
-      single.click();
-    }
-  }
+const goToPreviuosMonth = async (page) => {
+  await page.click(".light-button-bYDQcOkp");
+  await new Promise((r) => setTimeout(r, 200));
+};
+
+const exportData = async (page) => {
+  await new Promise((r) => setTimeout(r, 1000));
+  let allArrows = await page.$$(".arrow-merBkM5y");
+
+  allArrows[11].click();
 
   await new Promise((r) => setTimeout(r, 1000));
   let all = await page.$$(".label-jFqVJoPk");
@@ -37,6 +39,65 @@ const exportData = async (page) => {
   await page.click(".variant-primary-D4RPB3ZC");
 };
 
-const changeTicker = async (page) => {};
+const changeTimeInterval = async (page) => {
+  await new Promise((r) => setTimeout(r, 1000));
+  let allArrows = await page.$$(
+    "button.button-merBkM5y.apply-common-tooltip.accessible-merBkM5y"
+  );
 
-module.exports = { exportData, changeDate, changeTicker };
+  for (const single of allArrows) {
+    const aa = await page.evaluate(
+      (el) => el.getAttribute("data-tooltip"),
+      single
+    );
+    if (aa == "Time Interval") {
+      single.click();
+    }
+  }
+  await new Promise((r) => setTimeout(r, 1000));
+
+  let times = await page.$$(".menuItem-RmqZNwwp");
+
+  for (const single of times) {
+    const aa = await page.evaluate(
+      (el) => el.getAttribute("data-value"),
+      single
+    );
+    console.log(aa);
+    if (aa == "60") {
+      single.click();
+    }
+  }
+};
+
+const changeTickerFromMain = async (page) => {
+  await page.click("#header-toolbar-symbol-search");
+  await new Promise((r) => setTimeout(r, 1000));
+
+  await page.$eval(".input-qm7Rg5MB", (el) => (el.value = "TSLA"));
+  await page.click(".input-qm7Rg5MB");
+};
+
+const changeTicker = async (page) => {
+  await new Promise((r) => setTimeout(r, 2000));
+  let result = [];
+  let times = await page.$$(".symbol-RsFlttSS");
+
+  for (const single of times) {
+    const aa = await page.evaluate(
+      (el) => el.getAttribute("data-symbol-short"),
+      single
+    );
+    result.push(single);
+  }
+  return result;
+};
+
+module.exports = {
+  exportData,
+  changeDate,
+  changeTimeInterval,
+  changeTicker,
+  goToPreviuosMonth,
+  setDate,
+};

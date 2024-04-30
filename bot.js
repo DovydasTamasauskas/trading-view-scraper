@@ -12,10 +12,18 @@ const ENDPIONT = "https://www.tradingview.com/chart/";
   });
 
   const page = await browser.newPage();
-  await page.setViewport({ width: 1400, height: 800 });
+  await page.setViewport({ width: 1400, height: 900 });
   await page.goto(ENDPIONT);
 
   await functions.changeDate(page);
-  await functions.exportData(page);
-  await functions.changeTicker(page);
+
+  const tickers = await functions.changeTicker(page);
+  for (const ticker of tickers) {
+    ticker.click();
+    await new Promise((r) => setTimeout(r, 500));
+    await functions.setDate(page);
+    await new Promise((r) => setTimeout(r, 500));
+    await functions.exportData(page);
+    await new Promise((r) => setTimeout(r, 500));
+  }
 })();
