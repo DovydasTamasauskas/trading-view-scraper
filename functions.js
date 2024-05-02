@@ -43,8 +43,51 @@ const clickManageLayouts = async (page) => {
   allArrows[11].click();
 };
 
-const changeLayout = async (page) => {
+const setLayout = async (page, layoutName) => {
   await clickManageLayouts(page);
+
+  await new Promise((r) => setTimeout(r, 1000));
+  let allLayouts = await page.$$(".layoutTitle-yyMUOAN9");
+
+  for (const single of allLayouts) {
+    const element = await page.evaluate((el) => el.innerText, single);
+    if (element == layoutName) {
+      single.click();
+    }
+  }
+  await new Promise((r) => setTimeout(r, 3000));
+};
+
+const navigate = async (page, layoutName) => {
+  await new Promise((r) => setTimeout(r, 1000));
+
+  let allArrows2 = await page.$$("button.isActive-I_wb5FjE");
+
+  for (const single of allArrows2) {
+    const aa = await page.evaluate(
+      (el) => el.getAttribute("data-tooltip"),
+      single
+    );
+    if (aa == layoutName) {
+      return null;
+    }
+  }
+
+  await new Promise((r) => setTimeout(r, 1000));
+
+  let allArrows = await page.$$(
+    "button.button-I_wb5FjE.apply-common-tooltip.common-tooltip-vertical.accessible-I_wb5FjE"
+  );
+
+  for (const single of allArrows) {
+    const aa = await page.evaluate(
+      (el) => el.getAttribute("data-tooltip"),
+      single
+    );
+    if (aa == layoutName) {
+      single.click();
+    }
+  }
 };
 
 const changeTimeInterval = async (page) => {
@@ -108,5 +151,6 @@ module.exports = {
   getTickers,
   goToPreviuosMonth,
   setDate,
-  changeLayout,
+  setLayout,
+  navigate,
 };

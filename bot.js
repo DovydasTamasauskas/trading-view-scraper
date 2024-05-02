@@ -4,6 +4,8 @@ const credentials = require("./credentials");
 
 const ENDPIONT = "https://www.tradingview.com/chart/";
 
+const MENIU_WATCHLIST = "Watchlist, details and news";
+
 (async () => {
   const ws = credentials.WS_URL;
   const browser = await puppeteer.connect({
@@ -14,7 +16,9 @@ const ENDPIONT = "https://www.tradingview.com/chart/";
   await page.setViewport({ width: 1400, height: 900 });
   await page.goto(ENDPIONT);
 
-  // await functions.changeLayout(page);
+  await functions.navigate(page, MENIU_WATCHLIST);
+
+  await functions.setLayout(page, "bot");
 
   await functions.changeDate(page, 12);
 
