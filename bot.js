@@ -14,9 +14,11 @@ const ENDPIONT = "https://www.tradingview.com/chart/";
   await page.setViewport({ width: 1400, height: 900 });
   await page.goto(ENDPIONT);
 
-  await functions.changeDate(page);
+  // await functions.changeLayout(page);
 
-  const tickers = await functions.changeTicker(page);
+  await functions.changeDate(page, 12);
+
+  const tickers = await functions.getTickers(page);
   for (const ticker of tickers) {
     ticker.click();
     await new Promise((r) => setTimeout(r, 500));

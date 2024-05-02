@@ -1,8 +1,8 @@
-const changeDate = async (page) => {
+const changeDate = async (page, month) => {
   await page.click(".button-uToIfRbZ");
 
   await new Promise((r) => setTimeout(r, 500));
-  for (var i = 0; i < 12; i++) await goToPreviuosMonth(page);
+  for (var i = 0; i < month; i++) await goToPreviuosMonth(page);
 
   await page.click(".day-N6r5jhbE");
   await page.click(".variant-primary-D4RPB3ZC");
@@ -20,10 +20,7 @@ const goToPreviuosMonth = async (page) => {
 };
 
 const exportData = async (page) => {
-  await new Promise((r) => setTimeout(r, 1000));
-  let allArrows = await page.$$(".arrow-merBkM5y");
-
-  allArrows[11].click();
+  await clickManageLayouts(page);
 
   await new Promise((r) => setTimeout(r, 1000));
   let all = await page.$$(".label-jFqVJoPk");
@@ -37,6 +34,17 @@ const exportData = async (page) => {
   await new Promise((r) => setTimeout(r, 1000));
 
   await page.click(".variant-primary-D4RPB3ZC");
+};
+
+const clickManageLayouts = async (page) => {
+  await new Promise((r) => setTimeout(r, 1000));
+  let allArrows = await page.$$(".arrow-merBkM5y");
+
+  allArrows[11].click();
+};
+
+const changeLayout = async (page) => {
+  await clickManageLayouts(page);
 };
 
 const changeTimeInterval = async (page) => {
@@ -78,7 +86,7 @@ const changeTickerFromMain = async (page) => {
   await page.click(".input-qm7Rg5MB");
 };
 
-const changeTicker = async (page) => {
+const getTickers = async (page) => {
   await new Promise((r) => setTimeout(r, 2000));
   let result = [];
   let times = await page.$$(".symbol-RsFlttSS");
@@ -97,7 +105,8 @@ module.exports = {
   exportData,
   changeDate,
   changeTimeInterval,
-  changeTicker,
+  getTickers,
   goToPreviuosMonth,
   setDate,
+  changeLayout,
 };
