@@ -20,6 +20,8 @@ const MENIU_WATCHLIST = "Watchlist, details and news";
 
   await functions.setLayout(page, "bot");
 
+  await functions.setList(page, "fxcm_test");
+
   await functions.changeDate(page, 12);
 
   const tickers = await functions.getTickers(page);

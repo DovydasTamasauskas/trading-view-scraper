@@ -144,6 +144,24 @@ const getTickers = async (page) => {
   return result;
 };
 
+const setList = async (page, listName) => {
+  await page.click(".widgetBtn-mQBvegEO");
+  await new Promise((r) => setTimeout(r, 1000));
+
+  let allArrows = await page.$$(".container-ODL8WA9K");
+
+  for (const single of allArrows) {
+    const aa = await page.evaluate(
+      (el) => el.getAttribute("data-title"),
+      single
+    );
+    if (aa == listName) {
+      single.click();
+    }
+  }
+  await new Promise((r) => setTimeout(r, 1000));
+};
+
 module.exports = {
   exportData,
   changeDate,
@@ -153,4 +171,5 @@ module.exports = {
   setDate,
   setLayout,
   navigate,
+  setList,
 };
