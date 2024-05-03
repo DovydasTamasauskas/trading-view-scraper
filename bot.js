@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const functions = require("./functions");
+const actions = require("./actions");
 const credentials = require("./credentials");
 
 const ENDPIONT = "https://www.tradingview.com/chart/";
@@ -16,19 +16,19 @@ const MENIU_WATCHLIST = "Watchlist, details and news";
   await page.setViewport({ width: 1400, height: 900 });
   await page.goto(ENDPIONT);
 
-  await functions.navigate(page, MENIU_WATCHLIST);
-  await functions.setLayout(page, "bot");
-  await functions.setList(page, "fxcm_test");
-  await functions.setTimeInterval(page, 60);
-  await functions.setDateByMonths(page, 12);
+  await actions.navigate(page, MENIU_WATCHLIST);
+  await actions.setLayout(page, "bot");
+  await actions.setList(page, "fxcm_test");
+  await actions.setTimeInterval(page, 60);
+  await actions.setDateByMonths(page, 12);
 
-  const tickers = await functions.getTickers(page);
+  const tickers = await actions.getTickers(page);
   for (const ticker of tickers) {
     ticker.click();
     await new Promise((r) => setTimeout(r, 500));
-    await functions.setDate(page);
+    await actions.setDate(page);
     await new Promise((r) => setTimeout(r, 500));
-    await functions.exportData(page);
+    await actions.exportData(page);
     await new Promise((r) => setTimeout(r, 500));
   }
 })();
