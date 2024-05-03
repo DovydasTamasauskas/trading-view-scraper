@@ -31,6 +31,7 @@ const exportData = async (page) => {
       single.click();
     }
   }
+  // await evaluateArray(page, ".label-jFqVJoPk", "innerText", layoutName);
   await new Promise((r) => setTimeout(r, 1000));
 
   await page.click(".variant-primary-D4RPB3ZC");
@@ -55,6 +56,8 @@ const setLayout = async (page, layoutName) => {
       single.click();
     }
   }
+
+  // await evaluateArray(page, ".layoutTitle-yyMUOAN9", "innerText", layoutName);
   await new Promise((r) => setTimeout(r, 3000));
 };
 
@@ -72,53 +75,25 @@ const navigate = async (page, layoutName) => {
       return null;
     }
   }
+  // await evaluateArray(page, "button.isActive-I_wb5FjE", "data-tooltip", null);
 
   await new Promise((r) => setTimeout(r, 1000));
 
-  let allArrows = await page.$$(
-    "button.button-I_wb5FjE.apply-common-tooltip.common-tooltip-vertical.accessible-I_wb5FjE"
-  );
-
-  for (const single of allArrows) {
-    const aa = await page.evaluate(
-      (el) => el.getAttribute("data-tooltip"),
-      single
-    );
-    if (aa == layoutName) {
-      single.click();
-    }
-  }
+  const querySelector =
+    "button.button-I_wb5FjE.apply-common-tooltip.common-tooltip-vertical.accessible-I_wb5FjE";
+  await evaluateArray(page, querySelector, "data-tooltip", layoutName);
 };
 
-const changeTimeInterval = async (page) => {
-  await new Promise((r) => setTimeout(r, 1000));
-  let allArrows = await page.$$(
-    "button.button-merBkM5y.apply-common-tooltip.accessible-merBkM5y"
-  );
-
-  for (const single of allArrows) {
-    const aa = await page.evaluate(
-      (el) => el.getAttribute("data-tooltip"),
-      single
-    );
-    if (aa == "Time Interval") {
-      single.click();
-    }
-  }
+const changeTimeInterval = async (page, interval) => {
   await new Promise((r) => setTimeout(r, 1000));
 
-  let times = await page.$$(".menuItem-RmqZNwwp");
+  const querySelector =
+    "button.button-merBkM5y.apply-common-tooltip.accessible-merBkM5y";
+  await evaluateArray(page, querySelector, "data-tooltip", "Time Interval");
 
-  for (const single of times) {
-    const aa = await page.evaluate(
-      (el) => el.getAttribute("data-value"),
-      single
-    );
-    console.log(aa);
-    if (aa == "60") {
-      single.click();
-    }
-  }
+  await new Promise((r) => setTimeout(r, 500));
+
+  await evaluateArray(page, ".menuItem-RmqZNwwp", "data-value", interval);
 };
 
 const changeTickerFromMain = async (page) => {
@@ -145,18 +120,31 @@ const getTickers = async (page) => {
 };
 
 const setList = async (page, listName) => {
+  await new Promise((r) => setTimeout(r, 1000));
   await page.click(".widgetBtn-mQBvegEO");
   await new Promise((r) => setTimeout(r, 1000));
 
-  let allArrows = await page.$$(".container-ODL8WA9K");
+  await evaluateArray(page, ".container-ODL8WA9K", "data-title", listName);
+};
 
-  for (const single of allArrows) {
-    const aa = await page.evaluate(
-      (el) => el.getAttribute("data-title"),
-      single
+const evaluateArray = async (
+  page,
+  querySelector,
+  attributeName,
+  attributeValue
+) => {
+  await new Promise((r) => setTimeout(r, 1000));
+
+  let list = await page.$$(querySelector);
+
+  for (const item of list) {
+    const element = await page.evaluate(
+      (el, name) => el.getAttribute(name),
+      item,
+      attributeName
     );
-    if (aa == listName) {
-      single.click();
+    if (element == attributeValue) {
+      item.click();
     }
   }
   await new Promise((r) => setTimeout(r, 1000));
