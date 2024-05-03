@@ -7,8 +7,8 @@ const window = require("./setup/window");
   const browser = await puppeteerBrowser.create();
   const page = await window.create(browser);
 
-  await action.navigate(page, c.MENIU_WATCHLIST);
   await action.setLayout(page, c.LAYOUT_NAME);
+  await action.navigate(page, c.MENIU_WATCHLIST);
   await action.setList(page, c.LIST_NAME);
   await action.setTimeInterval(page, c.TIME_INTERVAL);
   await action.setDateByMonths(page, c.HISTORY_LENGTH_MONTH);

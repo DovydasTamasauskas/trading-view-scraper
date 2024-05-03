@@ -1,22 +1,23 @@
 const click = require("./click");
 const evaluate = require("./evaluate");
+const { BUTTON } = require("./const/button");
 
 const setDateByMonths = async (page, month) => {
   await new Promise((r) => setTimeout(r, 500));
-  await page.click(".button-uToIfRbZ");
+  await page.click(BUTTON.TIME_ZONE_MENU.CALENDAR);
 
   for (var i = 0; i < month; i++) await click.onPreviuosMonth(page);
 
-  await page.click(".day-N6r5jhbE");
+  await page.click(BUTTON.CALENDAR.FIRST_DAY_OF_MONTH);
   await new Promise((r) => setTimeout(r, 500));
-  await page.click(".variant-primary-D4RPB3ZC");
+  await page.click(BUTTON.CALENDAR.SAVE);
 };
 
 const setDate = async (page) => {
   await new Promise((r) => setTimeout(r, 500));
-  await page.click(".button-uToIfRbZ");
+  await page.click(BUTTON.TIME_ZONE_MENU.CALENDAR);
   await new Promise((r) => setTimeout(r, 500));
-  await page.click(".variant-primary-D4RPB3ZC");
+  await page.click(BUTTON.CALENDAR.SAVE);
 };
 
 const exportData = async (page) => {
@@ -24,32 +25,36 @@ const exportData = async (page) => {
 
   await evaluate.clickByInnterText(
     page,
-    ".label-jFqVJoPk",
-    "Export chart data…"
+    BUTTON.MANAGE_LAYOUTS.EXPORT_DATA.CLASS,
+    BUTTON.MANAGE_LAYOUTS.EXPORT_DATA.INNERTEXT
   );
 
-  await page.click(".variant-primary-D4RPB3ZC");
+  await page.click(BUTTON.CALENDAR.SAVE);
 };
 
 const setLayout = async (page, layoutName) => {
   await click.onManageLayouts(page);
 
-  await evaluate.clickByInnterText(page, ".layoutTitle-yyMUOAN9", layoutName);
+  await evaluate.clickByInnterText(
+    page,
+    BUTTON.MANAGE_LAYOUTS.LAYOUT,
+    layoutName
+  );
 };
 
 const navigate = async (page, layoutName) => {
   const isWatchListView = await evaluate.isListItemVisible(
     page,
-    "button.isActive-I_wb5FjE",
-    "data-tooltip",
+    BUTTON.MAIN_MENU.ACTIVE.CLASS,
+    BUTTON.MAIN_MENU.ACTIVE.ATRIBUTE,
     layoutName
   );
   if (isWatchListView) return;
 
   await evaluate.clickByAtribute(
     page,
-    "button.button-I_wb5FjE.apply-common-tooltip.common-tooltip-vertical.accessible-I_wb5FjE",
-    "data-tooltip",
+    BUTTON.MAIN_MENU.WATCHLIST.CLASS,
+    BUTTON.MAIN_MENU.WATCHLIST.ATRIBUTE,
     layoutName
   );
 };
@@ -57,32 +62,32 @@ const navigate = async (page, layoutName) => {
 const setTimeInterval = async (page, interval) => {
   await evaluate.clickByAtribute(
     page,
-    "button.button-merBkM5y.apply-common-tooltip.accessible-merBkM5y",
-    "data-tooltip",
+    BUTTON.TOP_MENU.TIME_INTERVAL.CLASS,
+    BUTTON.TOP_MENU.TIME_INTERVAL.ATRIBUTE,
     "Time Interval"
   );
 
   await evaluate.clickByAtribute(
     page,
-    ".menuItem-RmqZNwwp",
-    "data-value",
+    BUTTON.TIME_INTERVAL.LABEL.CLASS,
+    BUTTON.TIME_INTERVAL.LABEL.ATRIBUTE,
     interval
   );
 };
 
 const getTickers = async (page) => {
   await new Promise((r) => setTimeout(r, 2000));
-  return await page.$$(".symbol-RsFlttSS");
+  return await page.$$(BUTTON.WATCHLIST.SYMBOL);
 };
 
 const setList = async (page, listName) => {
   await new Promise((r) => setTimeout(r, 3000));
-  await page.click(".widgetBtn-mQBvegEO");
+  await page.click(BUTTON.WATCHLIST.LIST.BUTTON);
 
   await evaluate.clickByAtribute(
     page,
-    ".container-ODL8WA9K",
-    "data-title",
+    BUTTON.WATCHLIST.LIST.POPUP_LIST.CLASS,
+    BUTTON.WATCHLIST.LIST.POPUP_LIST.ATRIBUTE,
     listName
   );
 };
