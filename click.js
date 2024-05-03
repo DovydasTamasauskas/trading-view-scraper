@@ -6,8 +6,9 @@ const onManageLayouts = async (page) => {
 };
 
 const onPreviuosMonth = async (page) => {
+  await new Promise((r) => setTimeout(r, 100));
   await page.click(".light-button-bYDQcOkp");
-  await new Promise((r) => setTimeout(r, 200));
+  await new Promise((r) => setTimeout(r, 100));
 };
 
 module.exports = {

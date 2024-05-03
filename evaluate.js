@@ -1,4 +1,4 @@
-const evaluateArray = async (
+const clickByAtribute = async (
   page,
   querySelector,
   attributeName,
@@ -15,6 +15,20 @@ const evaluateArray = async (
       attributeName
     );
     if (element == attributeValue) {
+      item.click();
+    }
+  }
+  await new Promise((r) => setTimeout(r, 1000));
+};
+
+const clickByInnterText = async (page, querySelector, innerTextValue) => {
+  await new Promise((r) => setTimeout(r, 1000));
+
+  let list = await page.$$(querySelector);
+
+  for (const item of list) {
+    const element = await page.evaluate((el) => el.innerText, item);
+    if (element == innerTextValue) {
       item.click();
     }
   }
@@ -46,4 +60,4 @@ const isListItemVisible = async (
   return false;
 };
 
-module.exports = { evaluateArray, isListItemVisible };
+module.exports = { clickByAtribute, isListItemVisible, clickByInnterText };
