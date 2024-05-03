@@ -88,27 +88,9 @@ const setTimeInterval = async (page, interval) => {
   );
 };
 
-const changeTickerFromMain = async (page) => {
-  await page.click("#header-toolbar-symbol-search");
-  await new Promise((r) => setTimeout(r, 1000));
-
-  await page.$eval(".input-qm7Rg5MB", (el) => (el.value = "TSLA"));
-  await page.click(".input-qm7Rg5MB");
-};
-
 const getTickers = async (page) => {
   await new Promise((r) => setTimeout(r, 2000));
-  let result = [];
-  let times = await page.$$(".symbol-RsFlttSS");
-
-  for (const single of times) {
-    const aa = await page.evaluate(
-      (el) => el.getAttribute("data-symbol-short"),
-      single
-    );
-    result.push(single);
-  }
-  return result;
+  return await page.$$(".symbol-RsFlttSS");
 };
 
 const setList = async (page, listName) => {
