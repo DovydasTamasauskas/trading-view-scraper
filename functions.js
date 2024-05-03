@@ -1,4 +1,4 @@
-const changeDate = async (page, month) => {
+const setDateByMonths = async (page, month) => {
   await page.click(".button-uToIfRbZ");
 
   await new Promise((r) => setTimeout(r, 500));
@@ -84,7 +84,7 @@ const navigate = async (page, layoutName) => {
   await evaluateArray(page, querySelector, "data-tooltip", layoutName);
 };
 
-const changeTimeInterval = async (page, interval) => {
+const setTimeInterval = async (page, interval) => {
   await new Promise((r) => setTimeout(r, 1000));
 
   const querySelector =
@@ -152,8 +152,8 @@ const evaluateArray = async (
 
 module.exports = {
   exportData,
-  changeDate,
-  changeTimeInterval,
+  setDateByMonths,
+  setTimeInterval,
   getTickers,
   goToPreviuosMonth,
   setDate,

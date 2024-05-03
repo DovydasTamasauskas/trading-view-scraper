@@ -17,14 +17,10 @@ const MENIU_WATCHLIST = "Watchlist, details and news";
   await page.goto(ENDPIONT);
 
   await functions.navigate(page, MENIU_WATCHLIST);
-
   await functions.setLayout(page, "bot");
-
   await functions.setList(page, "fxcm_test");
-
-  await functions.changeTimeInterval(page, 60);
-
-  await functions.changeDate(page, 12);
+  await functions.setTimeInterval(page, 60);
+  await functions.setDateByMonths(page, 12);
 
   const tickers = await functions.getTickers(page);
   for (const ticker of tickers) {
