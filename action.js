@@ -76,7 +76,7 @@ const getTickers = async (page) => {
 };
 
 const setList = async (page, listName) => {
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 3000));
   await page.click(".widgetBtn-mQBvegEO");
 
   await evaluate.clickByAtribute(
