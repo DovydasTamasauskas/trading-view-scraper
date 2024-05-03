@@ -1,5 +1,5 @@
-const action = require("./action");
-const c = require("./const");
+const action = require("./src/action");
+const c = require("./src/const/const");
 const puppeteerBrowser = require("./setup/browser");
 const window = require("./setup/window");
 

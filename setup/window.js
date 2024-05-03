@@ -1,4 +1,4 @@
-const c = require("../const");
+const c = require("../src/const/const");
 
 const create = async (browser) => {
   const page = await browser.newPage();
