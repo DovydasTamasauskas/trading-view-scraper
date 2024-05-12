@@ -8,12 +8,13 @@ const params = require("./runParams");
   const browser = await puppeteerBrowser.create();
   const page = await window.create(browser);
 
+  await action.setDateByMonths(page, c.HISTORY_LENGTH_MONTH);
+
   for (const runParam of params.runParams) {
     await action.setLayout(page, runParam.LAYOUT_NAME);
     await action.navigate(page, c.MENIU_WATCHLIST);
     await action.setList(page, runParam.LIST_NAME);
     await action.setTimeInterval(page, c.TIME_INTERVAL);
-    await action.setDateByMonths(page, c.HISTORY_LENGTH_MONTH);
 
     const tickers = await action.getTickers(page);
     for (const ticker of tickers) {
