@@ -1,10 +1,12 @@
+const sleep = require("./sleeper");
+
 const clickByAtribute = async (
   page,
   querySelector,
   attributeName,
   attributeValue
 ) => {
-  await new Promise((r) => setTimeout(r, 1000));
+  await sleep.medium();
 
   let list = await page.$$(querySelector);
 
@@ -18,11 +20,11 @@ const clickByAtribute = async (
       item.click();
     }
   }
-  await new Promise((r) => setTimeout(r, 1000));
+  await sleep.medium();
 };
 
 const clickByInnterText = async (page, querySelector, innerTextValue) => {
-  await new Promise((r) => setTimeout(r, 1000));
+  await sleep.medium();
 
   let list = await page.$$(querySelector);
 
@@ -32,7 +34,7 @@ const clickByInnterText = async (page, querySelector, innerTextValue) => {
       item.click();
     }
   }
-  await new Promise((r) => setTimeout(r, 1000));
+  await sleep.medium();
 };
 
 const isListItemVisible = async (
@@ -41,7 +43,7 @@ const isListItemVisible = async (
   attributeName,
   attributeValue
 ) => {
-  await new Promise((r) => setTimeout(r, 1000));
+  await sleep.medium();
 
   let list = await page.$$(querySelector);
 
@@ -52,11 +54,11 @@ const isListItemVisible = async (
       attributeName
     );
     if (element == attributeValue) {
-      await new Promise((r) => setTimeout(r, 1000));
+      await sleep.medium();
       return true;
     }
   }
-  await new Promise((r) => setTimeout(r, 1000));
+  await sleep.medium();
   return false;
 };
 

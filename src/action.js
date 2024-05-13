@@ -1,22 +1,23 @@
 const click = require("./click");
 const evaluate = require("./evaluate");
 const { BUTTON } = require("./const/button");
+const sleep = require("./sleeper");
 
 const setDateByMonths = async (page, month) => {
-  await new Promise((r) => setTimeout(r, 500));
+  await sleep.quick();
   await page.click(BUTTON.TIME_ZONE_MENU.CALENDAR);
 
   for (var i = 0; i < month; i++) await click.onPreviuosMonth(page);
 
   await page.click(BUTTON.CALENDAR.FIRST_DAY_OF_MONTH);
-  await new Promise((r) => setTimeout(r, 500));
+  await sleep.quick();
   await page.click(BUTTON.CALENDAR.SAVE);
 };
 
 const setDate = async (page) => {
-  await new Promise((r) => setTimeout(r, 500));
+  await sleep.quick();
   await page.click(BUTTON.TIME_ZONE_MENU.CALENDAR);
-  await new Promise((r) => setTimeout(r, 500));
+  await sleep.quick();
   await page.click(BUTTON.CALENDAR.SAVE);
 };
 
@@ -76,12 +77,12 @@ const setTimeInterval = async (page, interval) => {
 };
 
 const getTickers = async (page) => {
-  await new Promise((r) => setTimeout(r, 2000));
+  await sleep.time(1000);
   return await page.$$(BUTTON.WATCHLIST.SYMBOL);
 };
 
 const setList = async (page, listName) => {
-  await new Promise((r) => setTimeout(r, 3000));
+  await sleep.time(1000);
   await page.click(BUTTON.WATCHLIST.LIST.BUTTON);
 
   await evaluate.clickByAtribute(

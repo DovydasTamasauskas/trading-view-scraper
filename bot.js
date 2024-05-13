@@ -3,6 +3,7 @@ const c = require("./src/const/const");
 const puppeteerBrowser = require("./setup/browser");
 const window = require("./setup/window");
 const params = require("./runParams");
+const sleep = require("./src/sleeper");
 
 (async () => {
   const browser = await puppeteerBrowser.create();
@@ -19,11 +20,11 @@ const params = require("./runParams");
     const tickers = await action.getTickers(page);
     for (const ticker of tickers) {
       ticker.click();
-      await new Promise((r) => setTimeout(r, 500));
+      await sleep.quick();
       await action.setDate(page);
-      await new Promise((r) => setTimeout(r, 500));
+      await sleep.quick();
       await action.exportData(page);
-      await new Promise((r) => setTimeout(r, 500));
+      await sleep.quick();
     }
   }
 })();
