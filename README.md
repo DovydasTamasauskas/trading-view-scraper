@@ -2,7 +2,7 @@
 
 ## Demo
 
-The demo is available on [my youTube channel](https://www.youtube.com/watch?v=63JEKOURBzo).
+The demo is available on [my youtube channel](https://www.youtube.com/watch?v=63JEKOURBzo).
 
 This bot scrapes [tradingView](https://www.tradingview.com) website for historical crypto, forex, stock, futures, and major World exchanges data.
 
