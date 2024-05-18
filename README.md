@@ -2,9 +2,9 @@
 
 ## Demo
 
-Demo is aviable on [my youtube channel](https://www.youtube.com/watch?v=63JEKOURBzo).
+The demo is available on [my youTube channel](https://www.youtube.com/watch?v=63JEKOURBzo).
 
-This bot scrapes [tradingView](https://www.tradingview.com) webiste for historical crypto, forex, stock, futures and major World exchanges data.
+This bot scrapes [tradingView](https://www.tradingview.com) website for historical crypto, forex, stock, futures, and major World exchanges data.
 
 ## Available scripts
 
@@ -18,11 +18,11 @@ node bot.js
 
 ## Setup
 
-To receive data from tradingView you should be looged in already and **have paided membership**.
+To receive data from tradingView you should be logged in already and **have paid membership**.
 
 mac:
 
-create copy of `credentials.js.sample` with name `credentials.js`
+create a copy of `credentials.js.sample` with the name `credentials.js`
 
 run in terminal:
 
@@ -32,4 +32,10 @@ sudo /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-deb
 
 Copy generated `ws://127.0.0.1:9222/devtools/browser/xxxxx...` to `credentials.js` file
 
-Navigate to `runParams.js` file and add WatchList and Layout.
+Navigate to the `runParams.js` file and place your WatchList and Layout names.
+
+## Lessons Learned
+
+The first scraper version was built with Python and Selenium. After a while, CAPTCHA occurred.
+
+Puppeteer was chosen because it simply opens a new tab and remembers previously logged-in user.
