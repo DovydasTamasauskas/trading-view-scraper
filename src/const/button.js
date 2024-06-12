@@ -27,7 +27,7 @@ const BUTTON = {
   CALENDAR: {
     PREVIOUS_MONTH: ".light-button-bYDQcOkp",
     FIRST_DAY_OF_MONTH: ".day-N6r5jhbE",
-    SAVE: ".variant-primary-D4RPB3ZC",
+    SAVE: ".button-D4RPB3ZC.primary-D4RPB3ZC",
   },
   TIME_ZONE_MENU: {
     CALENDAR: ".button-uToIfRbZ",
