@@ -6,6 +6,7 @@ const params = require("./runParams");
 const sleep = require("./src/sleeper");
 
 (async () => {
+  await fetch("http://localhost:3000/delete-exports?mode=hard");
   const browser = await puppeteerBrowser.create();
   const page = await window.create(browser);
 
@@ -27,4 +28,5 @@ const sleep = require("./src/sleeper");
       await sleep.quick();
     }
   }
+  await fetch("http://localhost:3000/export");
 })();
