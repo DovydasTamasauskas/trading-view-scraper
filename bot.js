@@ -6,7 +6,11 @@ const params = require("./runParams");
 const sleep = require("./src/sleeper");
 
 (async () => {
-  await fetch("http://localhost:3000/delete-exports?mode=hard");
+  try {
+    await fetch("http://localhost:3000/delete-exports?mode=hard");
+  } catch (e) {
+    console.log("Fialed to delete export in BE ", e);
+  }
   const browser = await puppeteerBrowser.create();
   const page = await window.create(browser);
 
@@ -28,5 +32,10 @@ const sleep = require("./src/sleeper");
       await sleep.quick();
     }
   }
-  await fetch("http://localhost:3000/export");
+  try {
+    await fetch("http://localhost:3000/export");
+  } catch (e) {
+    console.log("failed to export BE ", e);
+  }
+  process.exit(0);
 })();
