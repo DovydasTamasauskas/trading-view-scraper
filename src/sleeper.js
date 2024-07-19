@@ -1,5 +1,5 @@
 const quick = async () => {
-  await new Promise((r) => setTimeout(r, 400));
+  await new Promise((r) => setTimeout(r, 1000));
 };
 
 const medium = async () => {
