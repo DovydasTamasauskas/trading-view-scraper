@@ -25,7 +25,7 @@ const BUTTON = {
     LAYOUT: ".layoutTitle-yyMUOAN9",
   },
   CALENDAR: {
-    PREVIOUS_MONTH: ".light-button-bYDQcOkp",
+    PREVIOUS_MONTH: ".lightButton-bYDQcOkp",
     FIRST_DAY_OF_MONTH: ".day-N6r5jhbE",
     SAVE: ".button-D4RPB3ZC.primary-D4RPB3ZC",
   },
