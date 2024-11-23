@@ -10,9 +10,9 @@ const BUTTON = {
   WATCHLIST: {
     SYMBOL: ".symbol-RsFlttSS",
     LIST: {
-      BUTTON: ".widgetBtn-mQBvegEO",
+      BUTTON: ".widgetbarWidgetHeaderLeftSlot-mQBvegEO",
       POPUP_LIST: {
-        CLASS: ".container-ODL8WA9K",
+        CLASS: ".item-jFqVJoPk",
         ATRIBUTE: "data-title",
       },
     },
